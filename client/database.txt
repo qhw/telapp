@@ -1,0 +1,38 @@
+/*
+	 餐厅id
+	 餐厅名字
+	 餐厅图片
+	 餐厅电话
+	 餐厅地址
+	 餐厅联系人
+	 餐厅经度
+	 餐厅纬度
+	 其他说明
+	 */
+CREATE TABLE IF NOT EXISTS restaurant(
+		id 					int 					NOT NULL AUTO_INCREMENT PRIMARY_KEY,
+		resname			varchar(50),
+		resimage		varchar(50),
+		resphone		varchar(20),
+		resaddr			varchar(50),
+		reslinker		varchar(10),
+		reslong			double,
+		reslat			double,
+		other				varchar(50)	
+		)
+
+/*
+	 菜系编号
+	 所属餐厅
+	 菜名
+	 菜图片
+	 菜价格
+	 */
+CREATE TABLE IF NOT EXISTS menu(
+		id					int						NOT NULL AUTO_INCREMENT PRIMARY_KEY,
+		resid				int,
+		menuname		varchar(50),
+		menuimage		varchar(50),
+		menuprice		float	
+		)
+

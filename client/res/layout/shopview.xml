@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:padding= "5dip"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+<ListView
+    android:id="@+id/listview" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    />
+    <TextView
+  android:id="@+id/txtWarning"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:layout_gravity="center_vertical"
+  android:textSize="18dip"/>
+  <!--     <Button
+  android:id="@+id/shopmore"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:text="查看更多"
+/>--> 
+</LinearLayout>
