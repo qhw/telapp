@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 根元素是 TabHost ,我们这个文件要和TabActivity配合使用，在TabActivity的源代码里写死了要找的Id是android.R.id.tabhost， 
+  因此这里的ID也要定死成TabHost 的ID 是定死的 "@android:id/tabhost" 下面的类似，不再解释。 -->
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+  android:id="@android:id/tabhost" android:layout_width="fill_parent"
+  android:layout_height="fill_parent">
+
+  <!-- TabWidget 就是标签选项卡的头部部分,注意ID的写法 -->
+  <LinearLayout android:orientation="vertical"
+    android:layout_width="fill_parent" android:layout_height="fill_parent">
+
+    <TabWidget android:id="@android:id/tabs"
+      android:layout_width="fill_parent" android:layout_height="wrap_content"
+      android:layout_weight="0" >
+      >
+    </TabWidget>
+    <!-- FrameLayout 就是标签的内容显示部分，注意ID的写法，还要注意我们做了个上部空白设定 android:paddingTop="65dp",是为了不让内容和标签重叠 -->
+
+    <FrameLayout android:id="@android:id/tabcontent"
+      android:layout_width="fill_parent" android:layout_weight="1"
+      android:layout_height="wrap_content">
+      
+    </FrameLayout>
+
+
+  </LinearLayout>
+</TabHost>

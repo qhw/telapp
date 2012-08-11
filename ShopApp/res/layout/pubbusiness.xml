@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:fadeScrollbars="true">
+<LinearLayout 
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<TextView
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:text="标题:"
+  android:textSize="18dip"
+/>
+<EditText
+  android:id="@+id/title"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+/>
+<LinearLayout 
+    android:orientation= "horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+		<RadioGroup
+		    android:id="@+id/usergroup"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:orientation="horizontal"
+		    >
+		   <RadioButton
+		    android:id="@+id/buy" 
+		    android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:text="求购" >
+		    </RadioButton>
+		    <RadioButton
+		    android:id="@+id/sell" 
+		    android:layout_width="wrap_content" 
+		    android:layout_height="wrap_content"
+		    android:layout_weight="1"
+		    android:text="出售" >
+		    </RadioButton>
+		</RadioGroup>
+ </LinearLayout>
+<TextView
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+  android:text="详细说明:"
+  android:textSize="18dip"
+/>
+<EditText
+  android:id="@+id/detail"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content"
+/>
+<LinearLayout 
+    android:id="@+id/layoutprice"  
+    android:orientation= "horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+			<TextView
+			  android:layout_width="wrap_content"
+			  android:layout_height="wrap_content"
+			  android:text="价格:"
+			  android:layout_weight="2"
+			  android:textSize="18dip"
+			/>
+			<EditText
+			  android:id="@+id/price"  
+			  android:layout_width="wrap_content" 
+			  android:layout_height="wrap_content" 
+			  android:layout_weight="5"
+			  android:text="0"
+			  />
+			  <TextView
+			  android:layout_width="wrap_content"
+			  android:layout_height="wrap_content"
+			  android:layout_weight="1"
+			  android:text="元"
+			  android:textSize="18dip"
+			/>
+</LinearLayout>
+<LinearLayout 
+    android:orientation= "horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+		<TextView
+		  android:layout_width="wrap_content"
+		  android:layout_height="wrap_content"
+		  android:layout_weight="2"
+		  android:text="联系人:"
+		  android:textSize="18dip"
+		/>
+		<EditText
+		  android:id="@+id/linker"  
+		  android:layout_width="wrap_content" 
+		  android:layout_height="wrap_content" 
+		  android:layout_weight="6"
+		  android:text=""
+		  />
+</LinearLayout>
+<LinearLayout 
+    android:orientation= "horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="2"
+      android:text="电话    :"
+      android:textSize="18dip"
+    />
+    <EditText
+      android:id="@+id/phone"  
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_weight="6"
+      android:text=""
+      />
+</LinearLayout>
+<LinearLayout 
+    android:orientation= "horizontal"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+    <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_weight="2"
+      android:text="qq/msn:"
+      android:textSize="18dip"
+    />
+    <EditText
+      android:id="@+id/qq"  
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:layout_weight="6"
+      android:text=""
+      />
+</LinearLayout>
+  <LinearLayout 
+    android:id="@+id/layoutimg"  
+    android:orientation= "vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    >
+		<TextView
+		          android:layout_width="wrap_content"
+		          android:layout_height="wrap_content"
+		          android:layout_weight="2"
+		          android:text="图片(选填):"
+		          android:textSize="18dip"
+		        />
+		  <LinearLayout 
+		    android:orientation= "horizontal"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    >
+				<EditText
+				  android:id="@+id/businessimg"  
+				  android:layout_width="wrap_content" 
+				  android:layout_height="wrap_content" 
+				  android:layout_weight="6"
+				  android:editable="false"
+				  android:text=""
+				  />
+				  <Button
+				      android:id="@+id/addimg"
+				      android:layout_width="wrap_content"
+				      android:layout_height="wrap_content"
+				      android:layout_weight="1"
+				      android:text="选择图片"
+				    /> 
+		  </LinearLayout>
+</LinearLayout>
+ 
+<Button
+      android:id="@+id/addbusiness"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="添加"
+    /> 
+</LinearLayout>
+</ScrollView>

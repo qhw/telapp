@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+<Button
+      android:id="@+id/mydata"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="我的资料"
+    />
+<Button
+      android:id="@+id/pub"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="发布"
+    />
+ <Button
+      android:id="@+id/mybuy"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="我的求购"
+    />
+<Button
+      android:id="@+id/mysell"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="我的出售"
+    />
+ <Button
+      android:id="@+id/myshop"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:text="我家店铺"
+    />
+</LinearLayout>
