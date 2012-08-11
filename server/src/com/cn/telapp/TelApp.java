@@ -1,76 +1,100 @@
 package com.cn.telapp;
-import java.sql.DriverManager;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.json.JSONArray;
 
-import com.mysql.jdbc.Connection;
-
+import com.cn.telapp.common.Distance;
+import com.cn.telapp.common.ListComparator;
+import com.cn.telapp.sql.DAOHelper;
 
 public class TelApp {
-	
-	
-	private String url = null;
-	private String user = null;
-	private String passwd = null;
-	private Statement stmt = null;
-	private Connection conn = null;
-	
-	
-	public TelApp() throws SQLException
-	{
-		try {
-        	Class.forName("com.mysql.jdbc.Driver");	
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		url ="jdbc:mysql://219.245.92.83:3306/telapp";
-		user = "root";
-		passwd = "192052";
-		
-		try {
-			conn= (Connection) DriverManager.getConnection(url, user, passwd); //Á´½ÓÊý¾Ý¿â
-			stmt=(Statement) conn.createStatement();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+
+	private DAOHelper daoHelper = null;
+
+	public TelApp() {
+		daoHelper = new DAOHelper();
 	}
-	
+
+	public String getShopInfo() {
+		Map<String, String> map = null;
+		JSONArray array = new JSONArray();
+		String sql = "select * from restaurant";
+		ResultSet rSet = daoHelper.query(sql);
+		try {
+			while (rSet.next()) {
+				map = new HashMap<String, String>();
+				map.put("shopid", rSet.getString("id"));
+				map.put("shopname", rSet.getString("resname"));
+				map.put("shopimg", rSet.getString("resimage"));
+				map.put("shopphone", rSet.getString("resphone"));
+				map.put("shopaddr", rSet.getString("resaddr"));
+				map.put("shoplat", rSet.getString("reslat"));
+				map.put("shoplng", rSet.getString("reslong"));
+				map.put("shopother", rSet.getString("other"));
+				array.put(map);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			map = null;
+		}
+
+		return array.toString();
+	}
+
+	public Map<String, String> getShopInfo(int shopid) {
+		Map<String, String> map = null;
+		String sql = "select * from restaurant where id =" + shopid;
+		ResultSet rSet = daoHelper.query(sql);
+		try {
+			while (rSet.next()) {
+				map = new HashMap<String, String>();
+				map.put("shopid", rSet.getString("id"));
+				map.put("shopname", rSet.getString("resname"));
+				map.put("shopimg", rSet.getString("resimage"));
+				map.put("shopphone", rSet.getString("resphone"));
+				map.put("shopaddr", rSet.getString("resaddr"));
+				map.put("shoplat", rSet.getString("reslat"));
+				map.put("shoplng", rSet.getString("reslong"));
+				map.put("shopother", rSet.getString("other"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			map = null;
+		}
+		return map;
+	}
+
 	@SuppressWarnings("unchecked")
-	public String getShopInfo(String latitude, String longitude)
-	{	 
+	public String getShopInfo(String first,String pagesize, String latitude, String longitude) {
+		int size = Integer.parseInt(pagesize);
+		int firstPage = Integer.parseInt(first);
 		double lat = Double.parseDouble(latitude);
 		double lng = Double.parseDouble(longitude);
-		
+
 		ArrayList<String> reslist = new ArrayList<String>();
 		String sql = "select * from restaurant";
-		ResultSet rSet = query(sql);
-		
+		ResultSet rSet = daoHelper.query(sql);
+
+		int length = 0;
 		try {
-			while(rSet.next())
-			{
-				String restaurant ="";
-				
-				int distance = Distance.GetDistance(lat, lng,
-						rSet.getDouble("reslat"), rSet.getDouble("reslong"));
-				if (distance > 10000) continue;
-				restaurant += rSet.getInt("id") +";";
-				
-				
-				restaurant += rSet.getString("resname") +";";
-				restaurant += rSet.getString("resimage") +";";
-				restaurant += rSet.getString("resphone") +";";
-				restaurant += rSet.getString("resaddr") +";";
-				restaurant += rSet.getDouble("reslat") +";";
-				restaurant += rSet.getDouble("reslong") +";";
-				restaurant += rSet.getString("other") +";";
+			while (rSet.next()) {
+				String restaurant = "";
+				int distance = Distance.GetDistance(lat, lng, rSet
+						.getDouble("reslat"), rSet.getDouble("reslong"));
+				restaurant += rSet.getInt("id") + ";";
+
+				restaurant += rSet.getString("resname") + ";";
+				restaurant += rSet.getString("resimage") + ";";
+				restaurant += rSet.getString("resphone") + ";";
+				restaurant += rSet.getString("resaddr") + ";";
+				restaurant += rSet.getDouble("reslat") + ";";
+				restaurant += rSet.getDouble("reslong") + ";";
+				restaurant += rSet.getString("other") + ";";
 				restaurant += distance;
 				reslist.add(restaurant);
 			}
@@ -78,10 +102,15 @@ public class TelApp {
 			e.printStackTrace();
 		}
 		Collections.sort(reslist, new ListComparator.MemberListComparator());
-		
+
 		JSONArray array = new JSONArray();
-		for (String res : reslist)
-		{
+		for (String res : reslist) {
+			
+			if (length >= size){
+				break;
+			}
+			length++;
+			if (length < firstPage) continue;
 			Map map = new HashMap();
 			String[] info = res.split(";");
 			map.put("shopid", info[0]);
@@ -97,16 +126,22 @@ public class TelApp {
 		}
 		return array.toString();
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public String getShopMenu(int shopid)
-	{
+	public String getShopMenu(String first,String pagesize,int shopid) {
+		int size = Integer.parseInt(pagesize);
+		int firstPage = Integer.parseInt(first);
 		JSONArray array = new JSONArray();
 		String sql = "select * from menu where resid = " + shopid;
-		ResultSet rSet = query(sql);
+		ResultSet rSet = daoHelper.query(sql);
+		int length =0;
 		try {
-			while(rSet.next())
-			{
+			while (rSet.next()) {
+				if (length >= size){
+					break;
+				}
+				length++;
+				if (length < firstPage) continue;
 				Map map = new HashMap();
 				map.put("menuid", rSet.getInt("id"));
 				map.put("shopid", rSet.getInt("resid"));
@@ -120,98 +155,36 @@ public class TelApp {
 		}
 		return array.toString();
 	}
-	
 
-	public boolean execute(String sql)
-	{
-		try {
-			return stmt.execute(sql);
-		} catch (Exception e) {
-			// TODO: handle exception
-			return false;
-		}
-	}
-	
-	
-	public ResultSet query(String sql)
-	{
-		try {
-			return stmt.executeQuery(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return null;
-		}
-	}
-	
-	public int update(String sql)
-	{
-		try {
-			return stmt.executeUpdate(sql);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return 0;
-		}
-	}
-	
-	public void closeConn()
-	{
-		try {
-			if (conn != null)
-			{
-				conn.close();
-			} 
-		}catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	
-	public void closeState()
-	{
-		try {
-			if (stmt != null)
-			{
-				stmt.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void closeRs(ResultSet rs)
-	{
-		try {
-			if (rs != null)
-			{
-				rs.close();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
-	public static void main(String[] agrs)
-	{
-		TelApp telApp = null;
-		
-		try {
-			telApp = new TelApp();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println(e.getMessage());
-		}
-		String restaurants = telApp.getShopInfo("108.913", "34.234");
-		System.out.println(".................start res..................");
-		System.out.println(restaurants);
-		System.out.println(".................end res..................");
-		
-		
-		String menus = telApp.getShopMenu(1);
-		System.out.println(menus);
-		
+	public boolean addshops(Map<String, String> map) {
+		String sql = "insert into restaurant(resname, resimage, resphone, resaddr, reslinker, reslong, reslat, other)"
+				+ "values('"
+				+ map.get("shopname")
+				+ "','img/shops/"
+				+ map.get("shopimg")
+				+ "', '"
+				+ map.get("shopphone")
+				+ "', '"
+				+ map.get("shopaddr")
+				+ "','"
+				+ map.get("shoplinker")
+				+ "',"
+				+ map.get("shoplng")
+				+ ","
+				+ map.get("shoplat")
+				+ ", '"
+				+ map.get("shopother") + "')";
+		boolean flag = daoHelper.execute(sql);
+		return flag;
 	}
 
+	public boolean addmenus(Map<String, String> map) {
+		String sql = "insert into menu(resid, menuname, menuimage, menuprice)"
+				+ "values(" + map.get("shopid") + ",'" + map.get("menuname")
+				+ "','img/menus/" + map.get("menuimg") + "',"
+				+ map.get("menuprice") + ")";
+		boolean flag = daoHelper.execute(sql);
+		return flag;
+	}
 	//
 }

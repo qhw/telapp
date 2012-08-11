@@ -1,12 +1,11 @@
 <%@ page language="java" import="org.json.JSONException"
 	pageEncoding="utf-8"%>
-<%@page import="com.cn.telapp.TelApp"%>
+<%@page import="com.cn.shopapp.Store"%>
 <% request.setCharacterEncoding("utf-8"); %>
 <%
-	TelApp telapp = new TelApp();
+	Store store = new Store();
+	String shopid = request.getParameter("shopid");
 	String first = request.getParameter("pagefirst");
 	String pagesize = request.getParameter("pagesize");
-	String lat = request.getParameter("latitude");
-	String lng = request.getParameter("longitude");
-	out.print(telapp.getShopInfo(first,pagesize,lat,lng));
+	out.print(store.getShopItem(first, pagesize, shopid));
 %>

@@ -1,4 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@page import="java.io.FileOutputStream"%>
+<%@page import="java.io.File"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,6 +23,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
+    <%
+			 /*String value = request.getParameter("value");//获取value的值
+			 FileOutputStream fileout = new FileOutputStream("D:/Program Files/Apache Software Foundation/Tomcat 6.0/webapps/telapp/img/music.jpg");//设置文件保存在服务器的什么位置
+			 fileout.write(com.sun.org.apache.xml.internal.security.utils.Base64.decode(value.getBytes()));//使用base64解码
+			 fileout.close();
+    	 out.print("aa");
+    	 
+    	 out.println(path);
+    	 out.println(basePath);*/
+    	 out.println(new File("").getAbsolutePath());
+     %>
   </body>
 </html>
