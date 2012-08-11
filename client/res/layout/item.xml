@@ -1,31 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding= "5dip"
-    android:descendantFocusability="blocksDescendants"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    >
-<ImageView
-  android:id="@+id/img"
-  android:layout_width="64dip"
-  android:layout_height="64dip"
-  android:src="@drawable/icon"/>
-<TextView
-  android:id="@+id/content"
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content"
-  android:layout_gravity="center_vertical"
-  android:textSize="18dip"
-  android:layout_toRightOf="@+id/img"/>
-  
-  <ImageButton
-  android:id="@+id/shopcall"
-  android:layout_width="48dip"
-  android:layout_height="48dip"
-  android:layout_toRightOf="@+id/content"
-  android:focusable= "false"
-  android:layout_gravity="right"
-  android:src= "@drawable/call48" 
-/>
-</RelativeLayout >
+<LinearLayout 
+xmlns:android="http://schemas.android.com/apk/res/android" 
+android:paddingTop="3.0dip" 
+android:orientation="horizontal" 
+android:background="@drawable/listitem_selector"  
+android:layout_width="fill_parent" 
+android:layout_height="wrap_content">
+  <RelativeLayout 
+  android:layout_width="50.0dip" 
+  android:layout_height="50.0dip" 
+  android:layout_weight="0.0">
+    <ImageView 
+    android:id="@+id/img"
+    android:layout_width="50.0dip" 
+    android:layout_height="50.0dip" 
+    android:scaleType="fitCenter" 
+    android:layout_centerInParent="true" />
+  </RelativeLayout>
+  <RelativeLayout 
+  android:orientation="vertical" 
+  android:layout_width="wrap_content" 
+  android:layout_height="wrap_content" 
+  android:padding="4.0dip" 
+  android:layout_weight="1.0">
+    <TextView 
+    android:id="@+id/shop_name" 
+    android:textColor="#000000" 
+    android:layout_width="wrap_content" 
+    android:layout_height="32.0dip" 
+    android:textSize="18.0sp" 
+    android:layout_alignParentLeft="true"/>
+    <ImageView 
+    android:id="@+id/shopcall" 
+    android:layout_width="48dip" 
+    android:layout_height="48dip" 
+    android:src= "@drawable/call48" 
+    android:layout_alignParentRight="true"/>
+    <TextView 
+    android:id="@+id/content" 
+    android:textColor="#081008" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:textSize="16.0sp" 
+    android:layout_below="@id/shop_name"/>
+    <TextView 
+    android:layout_marginLeft="6.0dip" 
+    android:id="@+id/shop_distance" 
+    android:textColor="#101810" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:textSize="14.0sp" 
+    android:layout_below="@id/content" 
+    android:layout_alignParentBottom="true"/>
+  </RelativeLayout>
+</LinearLayout>

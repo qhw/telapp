@@ -1,25 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:padding= "5dip"
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    >
-<ListView
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="fill_parent" android:layout_height="fill_parent">
+  <LinearLayout 
+  android:orientation="vertical" 
+  android:background="#ffffffff" 
+  android:layout_width="fill_parent" 
+  android:layout_height="fill_parent">
+    <ListView 
     android:id="@+id/listview" 
+    android:paddingTop="45.0dip" 
+    android:paddingBottom="50.0dip" 
+    android:layout_width="fill_parent" 
+    android:cacheColorHint="#00000000" 
+    android:fadingEdge="none" 
+    android:fastScrollEnabled="false" 
+    android:clipToPadding="false"
+      android:layout_height="wrap_content" 
+      android:divider="@drawable/list_divider"/>
+    <TextView 
+    android:text="" android:textSize="20.0sp" 
+    android:textColor="#ff5a5a5a" 
+    android:gravity="center_horizontal" 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
-    />
-    <TextView
-  android:id="@+id/txtWarning"
-  android:layout_width="fill_parent"
-  android:layout_height="wrap_content"
-  android:layout_gravity="center_vertical"
-  android:textSize="18dip"/>
-  <!--     <Button
-  android:id="@+id/shopmore"
-  android:layout_width="fill_parent"
-  android:layout_height="wrap_content"
-  android:text="查看更多"
-/>--> 
-</LinearLayout>
+    android:paddingTop="15.0dip" 
+    android:visibility="invisible"/>
+  </LinearLayout>
+        <include android:id="@+id/shop_top" 
+  layout="@layout/shop_top_panel" 
+  android:layout_width="fill_parent" 
+  android:layout_height="wrap_content" />
+</FrameLayout>

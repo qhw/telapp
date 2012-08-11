@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout 
+android:background="@drawable/header" 
+android:layout_width="fill_parent" 
+android:layout_height="wrap_content" 
+xmlns:android="http://schemas.android.com/apk/res/android">
+    <TextView 
+    android:textSize="22.0sp" 
+    android:textColor="#ffffffff" 
+    android:ellipsize="middle" 
+    android:gravity="center_horizontal" 
+    android:id="@+id/top_title" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content" 
+    android:text="附近的餐厅" android:singleLine="true" 
+    android:layout_centerInParent="true" 
+    android:layout_alignWithParentIfMissing="true" />
+</RelativeLayout>

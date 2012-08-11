@@ -2,7 +2,7 @@ package com.cn.telapp.location;
 
 import java.util.Iterator;
 
-import com.cn.telapp.gprs.GPRS;
+import com.cn.telapp.util.GPRS;
 
 import android.location.GpsSatellite;
 import android.location.GpsStatus;
